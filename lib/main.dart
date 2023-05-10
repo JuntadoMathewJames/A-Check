@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'widgets/navdrawer.dart';
 import 'widgets/dashboard.dart';
-
+import 'widgets/sign_up.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: const MyHomePage(),
+      home: SignUp(),
     );
   }
 }
@@ -52,46 +52,46 @@ class _MyHomePageState extends State<MyHomePage> {
               SafeArea(
                 child: showWidget
                     ? NavigationRail(
-                  leading: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Icon(
-                        Icons.person_2_rounded,
-                        size: 100,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text('Logged in as a student',
-                              style: TextStyle(color: Colors.black38)),
-                          Text('John Cena',
-                              style: TextStyle(fontSize: 20)),
-                          Text('jcena@gbox.adnu.edu.ph',
-                              style: TextStyle(color: Colors.grey)),
+                        leading: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Icon(
+                              Icons.person_2_rounded,
+                              size: 100,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text('Logged in as a student',
+                                    style: TextStyle(color: Colors.black38)),
+                                Text('John Cena',
+                                    style: TextStyle(fontSize: 20)),
+                                Text('jcena@gbox.adnu.edu.ph',
+                                    style: TextStyle(color: Colors.grey)),
+                              ],
+                            ),
+                          ],
+                        ),
+                        groupAlignment: 1,
+                        extended: constraints.maxWidth >= 400,
+                        elevation: 5,
+                        destinations: const [
+                          NavigationRailDestination(
+                            icon: Icon(Icons.settings),
+                            label: Text('Settings'),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.logout),
+                            label: Text('Sign-out'),
+                          ),
                         ],
-                      ),
-                    ],
-                  ),
-                  groupAlignment: 1,
-                  extended: constraints.maxWidth >= 400,
-                  elevation: 5,
-                  destinations: const [
-                    NavigationRailDestination(
-                      icon: Icon(Icons.settings),
-                      label: Text('Settings'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.logout),
-                      label: Text('Sign-out'),
-                    ),
-                  ],
-                  selectedIndex: 0,
-                  onDestinationSelected: (value) {
-                    setState(() {
-                      selectedIndex = value;
-                    });
-                  },
-                )
+                        selectedIndex: 0,
+                        onDestinationSelected: (value) {
+                          setState(() {
+                            selectedIndex = value;
+                          });
+                        },
+                      )
                     : const Text(''),
               ),
               Expanded(
