@@ -1,14 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
-/* Samantha Mae L. De Las Nieves
-Team: The Beadles
-Project Name: A-Checker
-Feature: [ACHE-001] Registration Page
-Feature description:
-As a user, I want to register.
-Acceptance criteria: The user is able to register using Google or their own email address & password.
- */
-
-import 'package:flutter/material.dart'; //created by google
+import 'package:flutter/material.dart';
 import 'classDashboard.dart';
 
 class SignUp extends StatelessWidget {
