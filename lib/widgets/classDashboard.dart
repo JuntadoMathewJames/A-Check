@@ -148,3 +148,49 @@ class _ClassDashboard extends State<ClassDashboard> {
     );
   }
 }
+
+
+class JoinClassPopup extends StatelessWidget {
+  final TextEditingController codeController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Join Class',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: codeController,
+              decoration: InputDecoration(
+                hintText: 'Enter the code sent by your teacher',
+              ),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                // Handle "Done" button click
+                String code = codeController.text;
+                // Perform further actions
+              },
+              child: Text(
+                'Done',
+                style: TextStyle(color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black, // Dark color for the button
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
