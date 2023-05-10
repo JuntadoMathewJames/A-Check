@@ -2,16 +2,15 @@
 /* Samantha Mae L. De Las Nieves
 Team: The Beadles
 Project Name: A-Checker
-Feature: [ACHE-001] Registration Page
+Feature: [ACHE-004] Login Page
 Feature description:
 As a user, I want to register.
 Acceptance criteria: The user is able to register using Google or their own email address & password.
  */
 
 import 'package:flutter/material.dart'; //created by google
-import 'classDashboard.dart';
 
-class SignUp extends StatelessWidget {
+class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //method where widgets are created
@@ -32,7 +31,7 @@ class SignUp extends StatelessWidget {
                 ),
               ],
             ),
-            Text("Create an A-Check account",
+            Text("Sign in to A-Check",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
@@ -47,9 +46,26 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
               ],
+              // ),
+              // Center(
+              //   child: OutlinedButton(
+              //     style: OutlinedButton.styleFrom(
+              //       foregroundColor: Colors.black, side: BorderSide(
+              //         color: Colors.black,
+              //       ),
+              //     ), onPressed: () {  },
+              //   child: Text(
+              //       "Sign in with Google",
+              //     style: TextStyle(
+              //       fontWeight: FontWeight.w500,
+              //       fontSize: 16,
+              //     )
+              //   ),
+              //   ),
+              // ),
             ),
             Center(
-              child: GoogleSignUpButton(),
+              child: GoogleSignInButton(),
             ),
             Row(
               children: <Widget>[
@@ -61,12 +77,14 @@ class SignUp extends StatelessWidget {
                 ),
               ],
             ),
-            Text("OR",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18,
-                )),
+            Text(
+              "OR",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 18,
+              ),
+            ),
             Row(
               children: <Widget>[
                 Expanded(
@@ -120,29 +138,15 @@ class SignUp extends StatelessWidget {
                         border: OutlineInputBorder(),
                       ),
                     )),
+                RoundedCheckBox(),
                 Container(
                   padding: EdgeInsets.fromLTRB(0, 40, 56, 5),
                   alignment: Alignment.bottomRight,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      side: BorderSide(
-                        color: Colors.black,
-                      ),
-                    ),
-                    onPressed: () {
-                      GestureDetector(
-                          onTap: () {
-                            // your function here.
-                          },
-                          child: ClassDashboard());
-                    },
-                    child: Text("Confirm",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        )),
-                  ),
+                  child: Text("Confirm",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      )),
                 ),
               ],
             ),
@@ -153,7 +157,7 @@ class SignUp extends StatelessWidget {
   } //immutable widgets - state of these widgets don't CHANGE as app runs (e.g. texts)
 }
 
-class GoogleSignUpButton extends StatelessWidget {
+class GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -177,13 +181,67 @@ class GoogleSignUpButton extends StatelessWidget {
             width: 24.0,
           ),
           label: Text(
-            'Sign up with Google',
+            'Sign in with Google',
             style: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+//  CHECK BOX
+class RoundedCheckBox extends StatefulWidget {
+  @override
+  _RoundedCheckBoxState createState() => _RoundedCheckBoxState();
+}
+
+class _RoundedCheckBoxState extends State<RoundedCheckBox> {
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 50.0),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isChecked = !isChecked;
+              });
+            },
+            child: Container(
+              width: 24.0,
+              height: 50.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.grey,
+                ),
+                color: isChecked ? Colors.blue : Colors.transparent,
+              ),
+              child: isChecked
+                  ? Icon(
+                      Icons.check,
+                      size: 16.0,
+                      color: Colors.white,
+                    )
+                  : null,
+            ),
+          ),
+          SizedBox(width: 8.0),
+          Text(
+            'Keep me logged in',
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.black,
+            ),
+          ),
+        ],
       ),
     );
   }
