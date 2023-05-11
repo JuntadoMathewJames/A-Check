@@ -14,7 +14,8 @@ class CreateAccount extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Column(
+        child: ListView(children: [
+          Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -75,6 +76,7 @@ class CreateAccount extends StatelessWidget {
             ),
           ],
         ),
+            ],),
       ),
     );
   }

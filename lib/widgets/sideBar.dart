@@ -67,7 +67,7 @@ class MySideBar extends StatelessWidget {
               child: ListTile(
                 leading: OutlinedButton.icon (
                 onPressed: (){
-                  Navigator.of(context).pushNamed('/settings');
+
                 },
                 icon: const Icon(Icons.settings),
                  label: const Text("Settings"),
