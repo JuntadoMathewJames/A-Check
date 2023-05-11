@@ -28,7 +28,7 @@ class RouteGenerator{
       case "/user_type":
         return MaterialPageRoute(builder: (_) =>  CreateUserType());
       case "/create_class":
-        return MaterialPageRoute(builder: (_) => const CreateClass());
+        return MaterialPageRoute(builder: (_) =>  CreateClass());
       case "/settings":
         return MaterialPageRoute(builder: (_) => CreateAccount());
         default:
