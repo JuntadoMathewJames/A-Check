@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class CreateClass extends StatelessWidget {
-  const CreateClass({super.key});
+  final TextEditingController nameController = new TextEditingController();
+  final TextEditingController sectionController = new TextEditingController();
+  final TextEditingController classController = new TextEditingController();
+  final TextEditingController teacherController = new TextEditingController();
+  Future createClass({
+    required String name,
+    required String section,
+    required String classcode,
+  }) async {
+    final docUser = FirebaseFirestore.instance.collection('classes').doc();
+    final user = {
+      "id": docUser.id,
+      "Class name": name,
+      "Class Section": section,
+      "Class Code": classcode,
+      //"Teacher": teacher,
+    };
+    await docUser.set(user);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,27 +40,30 @@ class CreateClass extends StatelessWidget {
                         TextStyle(fontWeight: FontWeight.w400, fontSize: 40)),
               ),
               const Padding(padding: EdgeInsets.all(5)),
-              const SizedBox(
+              SizedBox(
                 width: 500,
                 child: TextField(
+                    controller: nameController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "Class Name",
                         hintText: "eg. English")),
               ),
               const Padding(padding: EdgeInsets.all(5)),
-              const SizedBox(
+              SizedBox(
                 width: 500,
                 child: TextField(
+                    controller: classController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "Class Code",
                         hintText: "eg. ENG101")),
               ),
               const Padding(padding: EdgeInsets.all(5)),
-              const SizedBox(
+              SizedBox(
                 width: 500,
                 child: TextField(
+                    controller: sectionController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "Class Section",
@@ -74,10 +98,14 @@ class CreateClass extends StatelessWidget {
                             style: TextStyle(color: Colors.white, fontSize: 23),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const CreateClass()));
+                            final name = nameController.text;
+                            final section = sectionController.text;
+                            final classcode = classController.text;
+
+                            createClass(
+                                name: name,
+                                section: section,
+                                classcode: classcode);
                           })))
             ],
           ),
