@@ -1,9 +1,5 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'classDashboard.dart';
-
-import 'package:a_check_project/dbclass/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,9 +9,6 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //method where widgets are created
-
-    bool showProgress = false;
-    bool visible = false;
     final TextEditingController passwordController =
         new TextEditingController();
     final TextEditingController confirmpassController =
@@ -24,6 +17,16 @@ class SignUp extends StatelessWidget {
     final TextEditingController emailController = new TextEditingController();
     final _formkey = GlobalKey<FormState>();
     final _auth = FirebaseAuth.instance;
+    Future createUser({required String email, required String password}) async {
+      final docUser = FirebaseFirestore.instance.collection('users').doc();
+      final user = {
+        "id": docUser.id,
+        "email": email,
+        "password": password,
+        "usertype": 0
+      };
+      await docUser.set(user);
+    }
 
     return Material(
       color: Colors.white,
@@ -82,7 +85,7 @@ class SignUp extends StatelessWidget {
                 Expanded(
                   child: Container(
                     width: 50,
-                    height: 45,
+                    height: 25,
                   ),
                 ),
               ],
@@ -90,6 +93,7 @@ class SignUp extends StatelessWidget {
             Column(
               children: <Widget>[
                 TextFormField(
+                  // HIDDEN FIELD FOR USER TYPE
                   decoration: InputDecoration.collapsed(hintText: ''),
                   controller: usertype,
                 ),
@@ -169,11 +173,11 @@ class SignUp extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      GestureDetector(
-                          onTap: () {
-                            // your function here.
-                          },
-                          child: ClassDashboard());
+                      final email = emailController.text;
+                      final password = passwordController.text;
+                      final passconf = confirmpassController.text;
+                      if (password != passconf) print("Password dont match");
+                      createUser(email: email, password: password);
                     },
                     child: Text("Confirm",
                         style: TextStyle(
