@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'classDashboard.dart';
+import 'package:a_check_project/dbclass/user.dart';
 
 class SignUp extends StatelessWidget {
   @override
