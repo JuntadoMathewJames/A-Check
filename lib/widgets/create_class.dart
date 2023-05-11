@@ -22,7 +22,6 @@ class CreateClass extends StatelessWidget {
     };
     await docUser.set(user);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,9 +105,17 @@ class CreateClass extends StatelessWidget {
                                 name: name,
                                 section: section,
                                 classcode: classcode);
-                          })))
-            ],
+                          },
+                      ),
+                  ),
+              ),
+        ],
           ),
-        ));
+        ),
+
+    );
+
   }
-}
+
+
+  }

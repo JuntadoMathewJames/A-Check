@@ -34,7 +34,7 @@ class Home extends StatelessWidget {
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                // Handle sign-in button click
+                Navigator.of(context).pushNamed('/login');
               },
               child: Text(
                 'Sign-in',
@@ -47,7 +47,7 @@ class Home extends StatelessWidget {
             SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () {
-                // Handle create account button click
+                Navigator.of(context).pushNamed('/sign_up');
               },
               child: Text(
                 'Create an Account',

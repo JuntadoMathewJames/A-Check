@@ -132,11 +132,44 @@ class Login extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.fromLTRB(0, 40, 56, 5),
                   alignment: Alignment.bottomRight,
-                  child: Text("Confirm",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      )),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      side: BorderSide(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/dashboard');
+
+                    },
+                    child: Text("Login",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        )),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 40, 56, 5),
+                  alignment: Alignment.bottomRight,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      side: BorderSide(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/sign_up');
+
+                    },
+                    child: Text("Sign Up",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        )),
+                  ),
                 ),
               ],
             ),

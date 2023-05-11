@@ -5,7 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatelessWidget {
+
   final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     //method where widgets are created
@@ -40,7 +42,7 @@ class SignUp extends StatelessWidget {
                 Expanded(
                   child: Container(
                     width: 50,
-                    height: 160,
+                    height: 100,
                   ),
                 ),
               ],
@@ -162,30 +164,45 @@ class SignUp extends StatelessWidget {
                         border: OutlineInputBorder(),
                       ),
                     )),
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 40, 56, 5),
-                  alignment: Alignment.bottomRight,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      side: BorderSide(
-                        color: Colors.black,
-                      ),
+                const SizedBox(width:20),
+    OutlinedButton (
+    onPressed: (){
+    final email = emailController.text;
+    final password = passwordController.text;
+    final passconf = confirmpassController.text;
+    if (password != passconf) print("Password dont match");
+    createUser(email: email, password: password);
+    Navigator.of(context).pushNamed('/user_type');
+    },
+    child: Text("Register",
+    style: TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    )),
+    style: OutlinedButton.styleFrom(
+    foregroundColor: Colors.black,
+    side: BorderSide(
+    color: Colors.black,
+    ),
+    ),
+    ),
+                OutlinedButton (
+                  onPressed: (){
+                    Navigator.of(context).pushNamed('/login');
+                  },
+                  child: Text("Go to Login",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      )),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    side: BorderSide(
+                      color: Colors.black,
                     ),
-                    onPressed: () {
-                      final email = emailController.text;
-                      final password = passwordController.text;
-                      final passconf = confirmpassController.text;
-                      if (password != passconf) print("Password dont match");
-                      createUser(email: email, password: password);
-                    },
-                    child: Text("Confirm",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        )),
                   ),
                 ),
+
               ],
             ),
           ],
