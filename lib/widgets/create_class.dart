@@ -74,11 +74,8 @@ class CreateClass extends StatelessWidget {
                             style: TextStyle(color: Colors.white, fontSize: 23),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const CreateClass()));
-                          })))
+
+                          },),),),
             ],
           ),
         ));

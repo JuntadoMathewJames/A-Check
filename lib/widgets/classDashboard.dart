@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'classLabel.dart';
-
+import 'sideBar.dart';
 class ClassDashboard extends StatefulWidget {
   const ClassDashboard({super.key});
   @override
@@ -8,8 +8,6 @@ class ClassDashboard extends StatefulWidget {
 }
 
 class _ClassDashboard extends State<ClassDashboard> {
-  bool showWidget = false;
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -17,95 +15,38 @@ class _ClassDashboard extends State<ClassDashboard> {
       builder: (context, constraints) {
         return Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                setState(() {
-                  showWidget = !showWidget;
-                });
-              },
-              icon: const Icon(Icons.menu),
-            ),
+            title: const Text('Dashboard'),
           ),
-          body: Row(
+          drawer: const MySideBar(),
+          body: Column(
             children: [
-              SafeArea(
-                child: showWidget
-                    ? NavigationRail(
-                        leading: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const Icon(
-                              Icons.person_2_rounded,
-                              size: 100,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('Logged in as a student',
-                                    style: TextStyle(color: Colors.black38)),
-                                Text('John Cena',
-                                    style: TextStyle(fontSize: 20)),
-                                Text('jcena@gbox.adnu.edu.ph',
-                                    style: TextStyle(color: Colors.grey)),
-                              ],
-                            ),
-                          ],
-                        ),
-                        groupAlignment: 1,
-                        extended: constraints.maxWidth >= 400,
-                        elevation: 5,
-                        destinations: const [
-                          NavigationRailDestination(
-                            icon: Icon(Icons.settings),
-                            label: Text('Settings'),
-                          ),
-                          NavigationRailDestination(
-                            icon: Icon(Icons.logout),
-                            label: Text('Sign-out'),
-                          ),
-                        ],
-                        selectedIndex: 0,
-                        onDestinationSelected: (value) {
-                          setState(() {
-                            selectedIndex = value;
-                          });
-                        },
-                      )
-                    : const Text(''),
+              const MyDashBoard(),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  fixedSize: const Size(300, 25),
+                ),
+                onPressed: () {},
+                child: const Text(
+                  'Add Students',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
-              Expanded(
-                child: Column(
-                  children: [
-                    const MyDashBoard(),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        fixedSize: const Size(300, 25),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        'Add Students',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      color: Colors.grey.shade200,
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.only(right: 40),
-                            child: Text(
-                              '0 students',
-                              style: TextStyle(fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ],
+              const SizedBox(height: 10),
+              Container(
+                color: Colors.grey.shade200,
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(right: 40),
+                      child: Text(
+                        '0 students',
+                        style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                   ],

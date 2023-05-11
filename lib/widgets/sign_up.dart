@@ -3,6 +3,11 @@ import 'classDashboard.dart';
 import 'package:a_check_project/dbclass/user.dart';
 
 class SignUp extends StatelessWidget {
+  final String data;
+   const SignUp({super.key,
+     required this.data,
+  });
+
   @override
   Widget build(BuildContext context) {
     //method where widgets are created
@@ -122,13 +127,29 @@ class SignUp extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      GestureDetector(
-                          onTap: () {
-                            // your function here.
-                          },
-                          child: ClassDashboard());
+                      Navigator.of(context).pushNamed('/dashboard');
                     },
-                    child: Text("Confirm",
+                    child: Text("Register",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        )),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 40, 56, 5),
+                  alignment: Alignment.bottomRight,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      side: BorderSide(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/');
+                    },
+                    child: Text("Back to Login",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,

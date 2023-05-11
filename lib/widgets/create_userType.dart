@@ -54,7 +54,32 @@ class _CreateUserTypeState extends State<CreateUserType> {
               child: Padding(
                 padding: EdgeInsets.only(top: 100.0),
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(_selectedOption == 1){
+                      Navigator.of(context).pushNamed('/sign_up', arguments: "Teacher");
+                    }else if(_selectedOption == 2){
+                      Navigator.of(context).pushNamed('/sign_up', arguments: "Student");
+                    }
+                    else{
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Error!'),
+                            content: Text('Choosing a user type is required before signing up.'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('Close'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  },
                   child: Text(
                     "Confirm",
                     style: TextStyle(
