@@ -1,8 +1,8 @@
 class User {
   String id;
   final String email;
-  final int password;
-  final DateTime usrType;
+  final String password;
+  final int usrType;
   User(
       {this.id = '',
       required this.email,

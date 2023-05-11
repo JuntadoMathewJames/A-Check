@@ -1,11 +1,30 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'classDashboard.dart';
+
 import 'package:a_check_project/dbclass/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatelessWidget {
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     //method where widgets are created
+
+    bool showProgress = false;
+    bool visible = false;
+    final TextEditingController passwordController =
+        new TextEditingController();
+    final TextEditingController confirmpassController =
+        new TextEditingController();
+    final TextEditingController usertype = new TextEditingController();
+    final TextEditingController emailController = new TextEditingController();
+    final _formkey = GlobalKey<FormState>();
+    final _auth = FirebaseAuth.instance;
+
     return Material(
       color: Colors.white,
       child: Container(
@@ -23,7 +42,7 @@ class SignUp extends StatelessWidget {
                 ),
               ],
             ),
-            Text("Create an A-Check account",
+            const Text("Create an A-Check account",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
@@ -70,6 +89,10 @@ class SignUp extends StatelessWidget {
             ),
             Column(
               children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration.collapsed(hintText: ''),
+                  controller: usertype,
+                ),
                 SizedBox(
                   width: 300,
                   height: 26,
@@ -85,6 +108,7 @@ class SignUp extends StatelessWidget {
                 SizedBox(
                     width: 300,
                     child: TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: OutlineInputBorder(),
@@ -106,6 +130,29 @@ class SignUp extends StatelessWidget {
                     width: 300,
                     child: TextField(
                       obscureText: true,
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                        border: OutlineInputBorder(),
+                      ),
+                    )),
+                SizedBox(
+                  width: 300,
+                  height: 26,
+                  child: Container(
+                    child: Text("Confirm Password",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 20,
+                        )),
+                  ),
+                ),
+                SizedBox(
+                    width: 300,
+                    child: TextField(
+                      obscureText: true,
+                      controller: confirmpassController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: OutlineInputBorder(),
@@ -179,3 +226,7 @@ class GoogleSignUpButton extends StatelessWidget {
     );
   }
 }
+
+
+// FUNCTIONS
+
