@@ -13,10 +13,7 @@ class StudentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 20.0,
-          backgroundImage: AssetImage('assets/avatar.png'),
-        ),
+        //removed avatar
         SizedBox(width: 8.0),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
