@@ -1,16 +1,41 @@
 import 'package:flutter/material.dart';
 import 'classDashboard.dart';
-import 'package:a_check_project/dbclass/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatelessWidget {
+<<<<<<< HEAD
   final String data;
    const SignUp({super.key,
      required this.data,
   });
 
+=======
+  final controller = TextEditingController();
+>>>>>>> fa2ffcc4d55e7d104f3fbe59303f9e8dd398d003
   @override
   Widget build(BuildContext context) {
     //method where widgets are created
+    final TextEditingController passwordController =
+        new TextEditingController();
+    final TextEditingController confirmpassController =
+        new TextEditingController();
+    final TextEditingController usertype = new TextEditingController();
+    final TextEditingController emailController = new TextEditingController();
+    final _formkey = GlobalKey<FormState>();
+    final _auth = FirebaseAuth.instance;
+    Future createUser({required String email, required String password}) async {
+      final docUser = FirebaseFirestore.instance.collection('users').doc();
+      final user = {
+        "id": docUser.id,
+        "email": email,
+        "password": password,
+        "usertype": 0
+      };
+      await docUser.set(user);
+    }
+
     return Material(
       color: Colors.white,
       child: Container(
@@ -28,7 +53,7 @@ class SignUp extends StatelessWidget {
                 ),
               ],
             ),
-            Text("Create an A-Check account",
+            const Text("Create an A-Check account",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
@@ -68,13 +93,18 @@ class SignUp extends StatelessWidget {
                 Expanded(
                   child: Container(
                     width: 50,
-                    height: 45,
+                    height: 25,
                   ),
                 ),
               ],
             ),
             Column(
               children: <Widget>[
+                TextFormField(
+                  // HIDDEN FIELD FOR USER TYPE
+                  decoration: InputDecoration.collapsed(hintText: ''),
+                  controller: usertype,
+                ),
                 SizedBox(
                   width: 300,
                   height: 26,
@@ -90,6 +120,7 @@ class SignUp extends StatelessWidget {
                 SizedBox(
                     width: 300,
                     child: TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: OutlineInputBorder(),
@@ -111,6 +142,29 @@ class SignUp extends StatelessWidget {
                     width: 300,
                     child: TextField(
                       obscureText: true,
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                        border: OutlineInputBorder(),
+                      ),
+                    )),
+                SizedBox(
+                  width: 300,
+                  height: 26,
+                  child: Container(
+                    child: Text("Confirm Password",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 20,
+                        )),
+                  ),
+                ),
+                SizedBox(
+                    width: 300,
+                    child: TextField(
+                      obscureText: true,
+                      controller: confirmpassController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: OutlineInputBorder(),
@@ -127,7 +181,15 @@ class SignUp extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+<<<<<<< HEAD
                       Navigator.of(context).pushNamed('/dashboard');
+=======
+                      final email = emailController.text;
+                      final password = passwordController.text;
+                      final passconf = confirmpassController.text;
+                      if (password != passconf) print("Password dont match");
+                      createUser(email: email, password: password);
+>>>>>>> fa2ffcc4d55e7d104f3fbe59303f9e8dd398d003
                     },
                     child: Text("Register",
                         style: TextStyle(
@@ -200,3 +262,7 @@ class GoogleSignUpButton extends StatelessWidget {
     );
   }
 }
+
+
+// FUNCTIONS
+
