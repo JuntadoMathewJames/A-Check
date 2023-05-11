@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'classLabel.dart';
 import 'sideBar.dart';
+import 'bottomBar.dart';
 class ClassDashboard extends StatefulWidget {
   const ClassDashboard({super.key});
   @override
@@ -63,27 +64,7 @@ class _ClassDashboard extends State<ClassDashboard> {
             foregroundColor: Colors.black,
             child: const Icon(Icons.check_circle_outline),
           ),
-          bottomNavigationBar: BottomAppBar(
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  autofocus: true,
-                  focusColor: Colors.grey.shade400,
-                  tooltip: 'List of Students',
-                  icon: const Icon(Icons.person),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  focusColor: Colors.grey.shade400,
-                  tooltip: 'Attendance Records',
-                  icon: const Icon(Icons.checklist),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
+          bottomNavigationBar: const BottomBreadcrumbBar(),
         );
       },
     );

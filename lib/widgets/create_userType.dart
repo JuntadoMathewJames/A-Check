@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CreateUserType extends StatefulWidget {
+
   @override
   _CreateUserTypeState createState() => _CreateUserTypeState();
 }
 
 class _CreateUserTypeState extends State<CreateUserType> {
+
   int _selectedOption = 0;
 
   void _handleOptionChange(int? value) {
@@ -56,9 +58,9 @@ class _CreateUserTypeState extends State<CreateUserType> {
                 child: OutlinedButton(
                   onPressed: () {
                     if(_selectedOption == 1){
-                      Navigator.of(context).pushNamed('/sign_up', arguments: "Teacher");
+                      Navigator.of(context).pushNamed('/create_account', arguments: "Teacher");
                     }else if(_selectedOption == 2){
-                      Navigator.of(context).pushNamed('/sign_up', arguments: "Student");
+                      Navigator.of(context).pushNamed('/create_account', arguments: "Student");
                     }
                     else{
                       showDialog(

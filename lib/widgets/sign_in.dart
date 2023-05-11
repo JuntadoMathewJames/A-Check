@@ -161,7 +161,7 @@ class Login extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/user_type');
+                      Navigator.of(context).pushNamed('/sign_up');
 
                     },
                     child: Text("Sign Up",

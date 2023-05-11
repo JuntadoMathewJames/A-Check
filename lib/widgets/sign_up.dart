@@ -6,12 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatelessWidget {
 
-  final String data;
-    SignUp({super.key,
-     required this.data,
-  });
-
-
   final controller = TextEditingController();
 
   @override
@@ -178,7 +172,7 @@ class SignUp extends StatelessWidget {
     final passconf = confirmpassController.text;
     if (password != passconf) print("Password dont match");
     createUser(email: email, password: password);
-    Navigator.of(context).pushNamed('/dashboard');
+    Navigator.of(context).pushNamed('/user_type');
     },
     child: Text("Register",
     style: TextStyle(
@@ -194,9 +188,9 @@ class SignUp extends StatelessWidget {
     ),
                 OutlinedButton (
                   onPressed: (){
-                    Navigator.of(context).pushNamed('/');
+                    Navigator.of(context).pushNamed('/login');
                   },
-                  child: Text("Back to Login",
+                  child: Text("Go to Login",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,

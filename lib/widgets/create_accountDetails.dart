@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CreateAccount extends StatelessWidget {
+  final String data;
+  CreateAccount({super.key,
+    required this.data,
+  });
+
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController schoolNameController = TextEditingController();
 
@@ -56,7 +61,7 @@ class CreateAccount extends StatelessWidget {
                     // Handle Confirm button click
                     String fullName = fullNameController.text;
                     String schoolName = schoolNameController.text;
-                    // Perform further actions
+                    Navigator.of(context).pushNamed('/dashboard');// Perform further actions
                   },
                   child: Text(
                     'Confirm',
