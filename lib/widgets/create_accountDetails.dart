@@ -62,7 +62,7 @@ class CreateAccount extends StatelessWidget {
                     // Handle Confirm button click
                     String fullName = fullNameController.text;
                     String schoolName = schoolNameController.text;
-                    Navigator.of(context).pushNamed('/dashboard');// Perform further actions
+                    Navigator.of(context).pushNamed('/sign_up', arguments: AccountArguments(data,fullName,schoolName));// Perform further actions
                   },
                   child: Text(
                     'Confirm',
@@ -80,4 +80,11 @@ class CreateAccount extends StatelessWidget {
       ),
     );
   }
+}
+
+class AccountArguments{
+  final String userType;
+  final String fullName;
+  final String schoolName;
+  AccountArguments(this.userType, this.fullName, this.schoolName);
 }

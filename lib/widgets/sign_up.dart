@@ -5,7 +5,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatelessWidget {
-
+  final String userType;
+  final String fullName;
+  final String schoolName;
+  SignUp({super.key,
+    required this.userType,
+    required this.fullName,
+    required this.schoolName,
+  });
   final controller = TextEditingController();
 
   @override
@@ -25,7 +32,9 @@ class SignUp extends StatelessWidget {
         "id": docUser.id,
         "email": email,
         "password": password,
-        "usertype": 0
+        "usertype": userType,
+        "fullname": fullName,
+        "schoolName": schoolName,
       };
       await docUser.set(user);
     }
@@ -170,9 +179,30 @@ class SignUp extends StatelessWidget {
     final email = emailController.text;
     final password = passwordController.text;
     final passconf = confirmpassController.text;
-    if (password != passconf) print("Password dont match");
-    createUser(email: email, password: password);
-    Navigator.of(context).pushNamed('/user_type');
+    if (password != passconf){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error!'),
+            content: Text('Password did not match!'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }else{
+      createUser(email: email, password: password);
+      Navigator.of(context).pushNamed('/dashboard');
+    }
+
+
     },
     child: Text("Register",
     style: TextStyle(

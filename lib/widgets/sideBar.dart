@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class MySideBar extends StatelessWidget {
+  Stream<List<User>> readUsers() => FirebaseFirestore.instance.collection('users').snapshots().map((snapshot) =>
+      snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
   const MySideBar({super.key});
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -22,12 +28,36 @@ class MySideBar extends StatelessWidget {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Logged in as a student',
+                    children:  [
+                      // StreamBuilder<List<User>>(
+                      //   stream: readUsers(),
+                      //   builder: (context,snapshot){
+                      //     if(snapshot.hasData){
+                      //       final users = snapshot.data!;
+                      //       print(users);
+                      //     }else{
+                      //       print('no data');
+                      //     }
+                      //     return AlertDialog(
+                      //       title: Text('Error!'),
+                      //       content: Text('Password did not match!'),
+                      //       actions: <Widget>[
+                      //         TextButton(
+                      //           child: Text('Close'),
+                      //           onPressed: () {
+                      //             Navigator.of(context).pop();
+                      //           },
+                      //         ),
+                      //       ],
+                      //     );
+                      //   }
+                      //
+                      // ),
+                      const Text('Logged in as a student',
                           style: TextStyle(color: Colors.black38)),
-                      Text('John Cena',
+                      const Text('John Cena',
                           style: TextStyle(fontSize: 20)),
-                      Text('jcena@gbox.adnu.edu.ph',
+                      const Text('jcena@gbox.adnu.edu.ph',
                           style: TextStyle(color: Colors.grey)),
                     ],
                   ),
@@ -93,5 +123,42 @@ class MySideBar extends StatelessWidget {
           ],
         ),
       );
+
+
   }
+}
+
+class User{
+  String id;
+  final String email;
+  final String password;
+  final String fullName;
+  final String schoolName;
+  final String userType;
+
+  User({
+    this.id = '',
+    required this.email,
+    required this.password,
+    required this.fullName,
+    required this.schoolName,
+    required this.userType,
+});
+  // Map<String,dynamic> toJson() =>{
+  //   'id':id,
+  //   'email':email,
+  //   'password':password,
+  //   'fullName':fullName,
+  //   'schoolName':schoolName,
+  //   'userType':userType,
+  // };
+
+  static User fromJson(Map<String, dynamic> json) => User(
+    id: json['id'],
+    email: json['email'],
+    password: json['password'],
+    fullName: json['fullName'],
+    schoolName: json['schoolName'],
+    userType: json['userType'],
+  );
 }
