@@ -15,14 +15,14 @@ class CreateClass extends StatelessWidget {
     required String classcode,
   }) async {
     final docUser = FirebaseFirestore.instance.collection('classes').doc();
-    final user = {
+    final classes = {
       "id": docUser.id,
       "name": name,
       "section": section,
       "code": classcode,
       //"Teacher": teacher,
     };
-    await docUser.set(user);
+    await docUser.set(classes);
   }
 
   @override

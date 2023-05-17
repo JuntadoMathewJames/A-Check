@@ -47,7 +47,7 @@ class Home extends StatelessWidget {
             SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/sign_up');
+                Navigator.of(context).pushNamed('/user_type');
               },
               child: Text(
                 'Create an Account',
