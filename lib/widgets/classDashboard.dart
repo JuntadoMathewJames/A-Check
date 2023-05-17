@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'classLabel.dart';
 import 'sideBar.dart';
 import 'bottomBar.dart';
+
 class ClassDashboard extends StatefulWidget {
   const ClassDashboard({super.key});
   @override
@@ -9,7 +10,6 @@ class ClassDashboard extends StatefulWidget {
 }
 
 class _ClassDashboard extends State<ClassDashboard> {
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -18,7 +18,7 @@ class _ClassDashboard extends State<ClassDashboard> {
           appBar: AppBar(
             title: const Text('Dashboard'),
           ),
-          drawer: const MySideBar(),
+          drawer: MySideBar(),
           body: Column(
             children: [
               const MyDashBoard(),
@@ -70,7 +70,6 @@ class _ClassDashboard extends State<ClassDashboard> {
     );
   }
 }
-
 
 class JoinClassPopup extends StatelessWidget {
   final TextEditingController codeController = TextEditingController();

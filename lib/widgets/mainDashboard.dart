@@ -12,7 +12,7 @@ class MainDashboard extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Dashboard'),
       ),
-      drawer: const MySideBar(),
+      drawer: MySideBar(),
       body: Column(children: [
         StreamBuilder(
             stream:
