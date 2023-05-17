@@ -58,13 +58,21 @@ class SignUp extends StatelessWidget {
         "fullname": fullName,
         "schoolName": schoolName,
       };
-
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) async => {
+      try {
+        final UserCred = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then(
+              (value) async => {
                 await docUser.set(user),
+                await FirebaseAuth.instance.currentUser
+                    ?.updateDisplayName(fullName),
                 Navigator.of(context).pushNamed('/dashboard')
-              });
+              },
+            );
+      } catch (e) {
+        print(e.toString());
+        return null;
+      }
     }
 
     return Material(
