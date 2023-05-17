@@ -1,3 +1,4 @@
+import 'package:a_check_project/widgets/my_class.dart';
 import 'package:flutter/material.dart';
 import 'widgets/sign_in.dart';
 import 'widgets/classDashboard.dart';
@@ -8,11 +9,10 @@ import 'widgets/create_userType.dart';
 import 'widgets/create_accountDetails.dart';
 import 'widgets/homePage.dart';
 import 'widgets/attendanceSheet.dart';
+import 'widget/my_class.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-
-
     switch (settings.name) {
       case "/":
         return MaterialPageRoute(builder: (_) => Home());
@@ -22,13 +22,13 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MainDashboard());
       case "/sign_up":
         final args = settings.arguments as AccountArguments;
-          return MaterialPageRoute(
-            builder: (_) =>  SignUp(
-              userType: args.userType,
-              fullName: args.fullName,
-              schoolName: args.schoolName,
-            ),
-          );
+        return MaterialPageRoute(
+          builder: (_) => SignUp(
+            userType: args.userType,
+            fullName: args.fullName,
+            schoolName: args.schoolName,
+          ),
+        );
       case "/user_type":
         return MaterialPageRoute(builder: (_) => CreateUserType());
       case "/create_class":
@@ -36,18 +36,22 @@ class RouteGenerator {
       case "/create_account":
         final args = settings.arguments;
         if (args is String) {
-          return MaterialPageRoute(builder: (_) =>
-              CreateAccount(
-                data: args,
-              ),
+          return MaterialPageRoute(
+            builder: (_) => CreateAccount(
+              data: args,
+            ),
           );
-        }else{
+        } else {
           return _errorRoute();
         }
       case "/class_dashboard":
-        return MaterialPageRoute(builder: (_) => const ClassDashboard());
+        final args = settings.arguments as Classes;
+        return MaterialPageRoute(
+            builder: (_) => ClassDashboard(
+                  myClass: args,
+                ));
       case "/check_attendance":
-        return MaterialPageRoute(builder: (_) =>  AttendanceApp());
+        return MaterialPageRoute(builder: (_) => AttendanceApp());
       default:
         return _errorRoute();
     }

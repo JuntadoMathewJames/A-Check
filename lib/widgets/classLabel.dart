@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dialogAssignBeadle.dart';
+import 'my_class.dart';
+
 class MyDashBoard extends StatelessWidget {
-  const MyDashBoard({super.key});
+  final Classes classes;
+  const MyDashBoard({super.key, required this.classes});
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +35,13 @@ class MyDashBoard extends StatelessWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("ITMC101\t\t\tZT12"),
-                      Text("INTRODUCTION TO COMPUTING",
+                    children: [
+                      Text("${classes.code}\t\t\t${classes.section}"),
+                      Text("${classes.name}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 15)),
-                      Text("Room: P217", style: TextStyle(color: Colors.black54)),
+                      Text("Teacher: ${classes.creator}",
+                          style: TextStyle(color: Colors.black54)),
                     ],
                   ),
                   Column(

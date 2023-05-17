@@ -4,8 +4,12 @@ import 'sideBar.dart';
 import 'bottomBar.dart';
 import 'dialogAddStudentsToClass.dart';
 import 'radioButtons.dart';
+import "my_class.dart";
+
 class ClassDashboard extends StatefulWidget {
-  const ClassDashboard({super.key});
+  final Classes myClass;
+
+  const ClassDashboard({super.key, required this.myClass});
   @override
   State<ClassDashboard> createState() => _ClassDashboard();
 }
@@ -22,7 +26,9 @@ class _ClassDashboard extends State<ClassDashboard> {
           drawer: MySideBar(),
           body: Column(
             children: [
-              const MyDashBoard(),
+              MyDashBoard(
+                classes: widget.myClass,
+              ),
               const SizedBox(height: 10),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

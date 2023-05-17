@@ -59,7 +59,7 @@ class SignUp extends StatelessWidget {
         "schoolName": schoolName,
       };
       try {
-        final UserCred = await FirebaseAuth.instance
+        await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password)
             .then(
               (value) async => {
@@ -98,7 +98,6 @@ class SignUp extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   fontSize: 35,
                 )),
-
             Row(
               children: <Widget>[
                 Expanded(

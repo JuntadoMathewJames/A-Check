@@ -33,17 +33,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  Widget cd = const ClassDashboard();
-  @override
-  Widget build(BuildContext context) {
-    return cd;
-  }
-}
