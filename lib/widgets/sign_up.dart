@@ -27,19 +27,44 @@ class SignUp extends StatelessWidget {
     final TextEditingController emailController = new TextEditingController();
     final _formkey = GlobalKey<FormState>();
     final _auth = FirebaseAuth.instance;
+    Future<bool> checkIfEmailInUse(String emailAddress) async {
+      try {
+        // Fetch sign-in methods for the email address
+        final list = await FirebaseAuth.instance
+            .fetchSignInMethodsForEmail(emailAddress);
+
+        // In case list is not empty
+        if (list.isNotEmpty) {
+          // Return true because there is an existing
+          // user using the email address
+          return true;
+        } else {
+          // Return false because email adress is not in use
+          return false;
+        }
+      } catch (error) {
+        // Handle error
+        // ...
+        return true;
+      }
+    }
+
     Future createUser({required String email, required String password}) async {
       final docUser = FirebaseFirestore.instance.collection('users').doc();
       final user = {
         "id": docUser.id,
         "email": email,
-        "password": password,
         "usertype": userType,
         "fullname": fullName,
         "schoolName": schoolName,
       };
-      await docUser.set(user);
+
       FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) async => {
+                await docUser.set(user),
+                Navigator.of(context).pushNamed('/dashboard')
+              });
     }
 
     return Material(
@@ -158,7 +183,7 @@ class SignUp extends StatelessWidget {
                   width: 300,
                   height: 26,
                   child: Container(
-                    child: Text("Confirm Password",
+                    child: const Text("Confirm Password",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
@@ -171,27 +196,67 @@ class SignUp extends StatelessWidget {
                     child: TextField(
                       obscureText: true,
                       controller: confirmpassController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: OutlineInputBorder(),
                       ),
                     )),
                 const SizedBox(width: 20),
                 OutlinedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     final email = emailController.text;
                     final password = passwordController.text;
                     final passconf = confirmpassController.text;
-                    if (password != passconf) {
+                    if (await checkIfEmailInUse(email) == true) {
+                      // ignore: use_build_context_synchronously
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Error!'),
-                            content: Text('Password did not match!'),
+                            title: const Text('Error!'),
+                            content: const Text('Email is in use!'),
                             actions: <Widget>[
                               TextButton(
-                                child: Text('Close'),
+                                child: const Text('Close'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else if (password.length < 6) {
+                      // ignore: use_build_context_synchronously
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error!'),
+                            content: const Text(
+                                'Password should be more than 6 characters'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('Close'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else if (password != passconf) {
+                      // ignore: use_build_context_synchronously
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error!'),
+                            content: const Text('Password did not match!'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('Close'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
@@ -202,7 +267,6 @@ class SignUp extends StatelessWidget {
                       );
                     } else {
                       createUser(email: email, password: password);
-                      Navigator.of(context).pushNamed('/dashboard');
                     }
                   },
                   child: Text("Register",
@@ -212,7 +276,7 @@ class SignUp extends StatelessWidget {
                       )),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.black,
-                    side: BorderSide(
+                    side: const BorderSide(
                       color: Colors.black,
                     ),
                   ),
