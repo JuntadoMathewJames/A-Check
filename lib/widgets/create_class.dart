@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CreateClass extends StatelessWidget {
   final TextEditingController nameController = new TextEditingController();
   final TextEditingController sectionController = new TextEditingController();
   final TextEditingController classController = new TextEditingController();
   final TextEditingController teacherController = new TextEditingController();
-
+  final currentUser = FirebaseAuth.instance.currentUser;
   CreateClass({super.key});
   Future createClass({
     required String name,
@@ -20,7 +21,7 @@ class CreateClass extends StatelessWidget {
       "name": name,
       "section": section,
       "code": classcode,
-      //"Teacher": teacher,
+      "creator": currentUser?.displayName,
     };
     await docUser.set(classes);
   }

@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class MySideBar extends StatelessWidget {
   final currentUser = FirebaseAuth.instance.currentUser;
-
   MySideBar({super.key});
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,6 @@ class MySideBar extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     const Text('Logged in as a student',
                         style: TextStyle(color: Colors.black38)),
                     Text('${currentUser!.displayName}',
@@ -83,5 +81,3 @@ class MySideBar extends StatelessWidget {
     );
   }
 }
-
-
