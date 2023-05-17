@@ -62,7 +62,29 @@ class CreateAccount extends StatelessWidget {
                     // Handle Confirm button click
                     String fullName = fullNameController.text;
                     String schoolName = schoolNameController.text;
-                    Navigator.of(context).pushNamed('/sign_up', arguments: AccountArguments(data,fullName,schoolName));// Perform further actions
+                    if(fullName == "" || schoolName == ""){
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error!'),
+                            content: const Text('All fields must have an input.'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('Close'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }else{
+                      Navigator.of(context).pushNamed('/sign_up', arguments: AccountArguments(data,fullName,schoolName));
+                    }
+
+                    // Perform further actions
                   },
                   child: Text(
                     'Confirm',

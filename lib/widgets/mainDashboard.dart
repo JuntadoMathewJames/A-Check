@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart'; //created by google
 import 'sideBar.dart';
 import 'circleButton.dart';
-import 'bottomBar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'classDashboard.dart';
 
 // ignore: use_key_in_widget_constructors
 class MainDashboard extends StatelessWidget {
@@ -34,7 +34,14 @@ class MainDashboard extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Container(
                             margin: EdgeInsets.symmetric(vertical: 5),
-                            child: ListTile(
+                            child:
+                            GestureDetector(
+                              // When the child is tapped, show a snackbar.
+                              onTap: () {
+                                Navigator.of(context).pushNamed('/class_dashboard');
+                              },
+                              // The custom button
+                              child:  ListTile(
                                 leading: Container(
                                   width: 40,
                                   height: 40,
@@ -43,7 +50,11 @@ class MainDashboard extends StatelessWidget {
                                       shape: BoxShape.circle),
                                 ),
                                 title:
-                                    Text(snapshot.data!.docs[index]['name'])));
+                                Text(snapshot.data!.docs[index]['name']),
+                              ),
+                            ),
+
+                        );
                       }),
                 );
               }
@@ -57,7 +68,7 @@ class MainDashboard extends StatelessWidget {
           ),
         ),
       ]),
-      bottomNavigationBar: const BottomBreadcrumbBar(),
+
     );
   }
 }

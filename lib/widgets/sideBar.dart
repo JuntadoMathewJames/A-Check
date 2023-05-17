@@ -5,11 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class MySideBar extends StatelessWidget {
   final currentUser = FirebaseAuth.instance.currentUser;
-  Stream<List<User>> readUsers() => FirebaseFirestore.instance
-      .collection('users')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
 
   MySideBar({super.key});
   @override
@@ -32,30 +27,7 @@ class MySideBar extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // StreamBuilder<List<User>>(
-                    //   stream: readUsers(),
-                    //   builder: (context,snapshot){
-                    //     if(snapshot.hasData){
-                    //       final users = snapshot.data!;
-                    //       print(users);
-                    //     }else{
-                    //       print('no data');
-                    //     }
-                    //     return AlertDialog(
-                    //       title: Text('Error!'),
-                    //       content: Text('Password did not match!'),
-                    //       actions: <Widget>[
-                    //         TextButton(
-                    //           child: Text('Close'),
-                    //           onPressed: () {
-                    //             Navigator.of(context).pop();
-                    //           },
-                    //         ),
-                    //       ],
-                    //     );
-                    //   }
-                    //
-                    // ),
+
                     const Text('Logged in as a student',
                         style: TextStyle(color: Colors.black38)),
                     Text('${currentUser!.displayName}',
@@ -68,27 +40,9 @@ class MySideBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('Item 1'),
+            title: Text('Home'),
             onTap: () {
-              Navigator.pop(context); // Close the drawer
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Item 1 Selected'),
-                    content: Text('You selected Item 1 from the menu.'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text('Close'),
-                        onPressed: () {
-                          FirebaseAuth.instance.signOut();
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              Navigator.of(context).pushNamed('/dashboard');
             },
           ),
           const Divider(
@@ -112,6 +66,7 @@ class MySideBar extends StatelessWidget {
               ),
               trailing: OutlinedButton.icon(
                 onPressed: () {
+                  FirebaseAuth.instance.signOut();
                   Navigator.of(context).pushNamed('/');
                 },
                 icon: const Icon(Icons.logout),
@@ -129,37 +84,4 @@ class MySideBar extends StatelessWidget {
   }
 }
 
-class User {
-  String id;
-  final String email;
-  final String password;
-  final String fullName;
-  final String schoolName;
-  final String userType;
 
-  User({
-    this.id = '',
-    required this.email,
-    required this.password,
-    required this.fullName,
-    required this.schoolName,
-    required this.userType,
-  });
-  // Map<String,dynamic> toJson() =>{
-  //   'id':id,
-  //   'email':email,
-  //   'password':password,
-  //   'fullName':fullName,
-  //   'schoolName':schoolName,
-  //   'userType':userType,
-  // };
-
-  static User fromJson(Map<String, dynamic> json) => User(
-        id: json['id'],
-        email: json['email'],
-        password: json['password'],
-        fullName: json['fullName'],
-        schoolName: json['schoolName'],
-        userType: json['userType'],
-      );
-}

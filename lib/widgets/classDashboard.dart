@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'classLabel.dart';
 import 'sideBar.dart';
 import 'bottomBar.dart';
-
+import 'dialogAddStudentsToClass.dart';
+import 'radioButtons.dart';
 class ClassDashboard extends StatefulWidget {
   const ClassDashboard({super.key});
   @override
@@ -28,7 +29,14 @@ class _ClassDashboard extends State<ClassDashboard> {
                   backgroundColor: Colors.black,
                   fixedSize: const Size(300, 25),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AddStudentsToClassList();
+                    },
+                  );
+                },
                 child: const Text(
                   'Add Students',
                   style: TextStyle(
@@ -57,7 +65,7 @@ class _ClassDashboard extends State<ClassDashboard> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // Add your onPressed code here!
+              Navigator.of(context).pushNamed('/check_attendance');
             },
             tooltip: 'Check Attendance',
             backgroundColor: Colors.white,

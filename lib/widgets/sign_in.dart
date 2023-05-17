@@ -31,36 +31,7 @@ class Login extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   fontSize: 35,
                 )),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    width: 50,
-                    height: 30,
-                  ),
-                ),
-              ],
-              // ),
-              // Center(
-              //   child: OutlinedButton(
-              //     style: OutlinedButton.styleFrom(
-              //       foregroundColor: Colors.black, side: BorderSide(
-              //         color: Colors.black,
-              //       ),
-              //     ), onPressed: () {  },
-              //   child: Text(
-              //       "Sign in with Google",
-              //     style: TextStyle(
-              //       fontWeight: FontWeight.w500,
-              //       fontSize: 16,
-              //     )
-              //   ),
-              //   ),
-              // ),
-            ),
-            Center(
-                //child: GoogleSignInButton(),
-                ),
+
             Row(
               children: <Widget>[
                 Expanded(
@@ -70,14 +41,6 @@ class Login extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            Text(
-              "OR",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 18,
-              ),
             ),
             Row(
               children: <Widget>[
@@ -171,9 +134,9 @@ class Login extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/sign_up');
+                      Navigator.of(context).pushNamed('/');
                     },
-                    child: Text("Sign Up",
+                    child: Text("Cancel",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
@@ -189,43 +152,6 @@ class Login extends StatelessWidget {
   } //immutable widgets - state of these widgets don't CHANGE as app runs (e.g. texts)
 }
 
-/*
-class GoogleSignInButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 0.0),
-      child: SizedBox(
-        height: 50.0,
-        child: ElevatedButton.icon(
-          onPressed: () {
-            // Handle button press
-          },
-          style: ElevatedButton.styleFrom(
-            primary: Colors.white,
-            onPrimary: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-          ),
-          icon: Image.asset(
-            'assets/google_logo.png', // Replace with your Google logo image path
-            height: 24.0,
-            width: 24.0,
-          ),
-          label: Text(
-            'Sign in with Google',
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-*/
 //  CHECK BOX
 class RoundedCheckBox extends StatefulWidget {
   @override

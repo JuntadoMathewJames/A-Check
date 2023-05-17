@@ -7,7 +7,7 @@ import 'widgets/create_class.dart';
 import 'widgets/create_userType.dart';
 import 'widgets/create_accountDetails.dart';
 import 'widgets/homePage.dart';
-
+import 'widgets/attendanceSheet.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -41,9 +41,13 @@ class RouteGenerator {
                 data: args,
               ),
           );
+        }else{
+          return _errorRoute();
         }
-        return _errorRoute();
-
+      case "/class_dashboard":
+        return MaterialPageRoute(builder: (_) => const ClassDashboard());
+      case "/check_attendance":
+        return MaterialPageRoute(builder: (_) =>  AttendanceApp());
       default:
         return _errorRoute();
     }

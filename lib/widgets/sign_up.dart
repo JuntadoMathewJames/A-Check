@@ -98,35 +98,7 @@ class SignUp extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   fontSize: 35,
                 )),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    width: 50,
-                    height: 30,
-                  ),
-                ),
-              ],
-            ),
-            Center(
-              child: GoogleSignUpButton(),
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    width: 50,
-                    height: 45,
-                  ),
-                ),
-              ],
-            ),
-            Text("OR",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18,
-                )),
+
             Row(
               children: <Widget>[
                 Expanded(
@@ -139,11 +111,6 @@ class SignUp extends StatelessWidget {
             ),
             Column(
               children: <Widget>[
-                TextFormField(
-                  // HIDDEN FIELD FOR USER TYPE
-                  decoration: InputDecoration.collapsed(hintText: ''),
-                  controller: usertype,
-                ),
                 SizedBox(
                   width: 300,
                   height: 26,
@@ -314,41 +281,6 @@ class SignUp extends StatelessWidget {
   } //immutable widgets - state of these widgets don't CHANGE as app runs (e.g. texts)
 }
 
-class GoogleSignUpButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 0.0),
-      child: SizedBox(
-        height: 50.0,
-        child: ElevatedButton.icon(
-          onPressed: () {
-            // Handle button press
-          },
-          style: ElevatedButton.styleFrom(
-            primary: Colors.white,
-            onPrimary: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-          ),
-          icon: Image.asset(
-            'assets/google_logo.png', // Replace with your Google logo image path
-            height: 24.0,
-            width: 24.0,
-          ),
-          label: Text(
-            'Sign up with Google',
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 
 // FUNCTIONS

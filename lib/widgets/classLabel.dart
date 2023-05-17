@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'dialogAssignBeadle.dart';
 class MyDashBoard extends StatelessWidget {
   const MyDashBoard({super.key});
 
@@ -56,7 +56,12 @@ class MyDashBoard extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.black),
                         onPressed: () {
-                          print("you pressed assign beadle");
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AssignBeadleDialog();
+                            },
+                          );
                         },
                         child: const Text("Assign Beadle"),
                       ),

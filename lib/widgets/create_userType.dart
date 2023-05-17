@@ -93,6 +93,25 @@ class _CreateUserTypeState extends State<CreateUserType> {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/');
+                  },
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
