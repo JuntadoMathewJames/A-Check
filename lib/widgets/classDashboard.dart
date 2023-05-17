@@ -56,17 +56,38 @@ class _ClassDashboard extends State<ClassDashboard> {
                 height: 50,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Padding(
                       padding: EdgeInsets.only(right: 40),
                       child: Text(
-                        '0 students',
+                        '${widget.myClass.students?.length} students',
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                   ],
                 ),
               ),
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: widget.myClass.students?.length,
+                  itemBuilder: (context, index) {
+                    // for(int i = 0; i < )
+
+                    return Container(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+
+                      // The custom button
+                      child: ListTile(
+                        leading: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: Colors.red, shape: BoxShape.circle),
+                        ),
+                        title: Text("${widget.myClass.students![index]}"),
+                      ),
+                    );
+                  }),
             ],
           ),
           floatingActionButton: FloatingActionButton(
