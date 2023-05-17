@@ -22,6 +22,7 @@ class CreateClass extends StatelessWidget {
       "section": section,
       "code": classcode,
       "creator": currentUser?.displayName,
+      "students": []
     };
     await docUser.set(classes);
   }

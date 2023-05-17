@@ -43,12 +43,14 @@ class MainDashboard extends StatelessWidget {
                       itemCount: cluss.length,
                       itemBuilder: (context, index) {
                         // for(int i = 0; i < )
-                        if (cluss[index]
-                                .students!
-                                .contains("${currentUser?.email}") ==
-                            true) {
+                        if ((cluss[index]
+                                    .students!
+                                    .contains("${currentUser?.email}") ==
+                                true) ||
+                            (cluss[index].creator ==
+                                currentUser?.displayName)) {
                           return Container(
-                            margin: EdgeInsets.symmetric(vertical: 5),
+                            margin: const EdgeInsets.symmetric(vertical: 5),
                             child: GestureDetector(
                               // When the child is tapped, show a snackbar.
                               onTap: () {
