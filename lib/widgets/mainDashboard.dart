@@ -13,19 +13,41 @@ class MainDashboard extends StatelessWidget {
         title: const Text('Dashboard'),
       ),
       drawer: const MySideBar(),
-      body: Row(children: [
+      body: Column(children: [
         StreamBuilder(
             stream:
                 FirebaseFirestore.instance.collection('classes').snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) =>
-                        Text(snapshot.data!.docs[index]['name']));
-              } else {
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.hasError) {
                 return Container();
               }
+              if (snapshot.hasData) {
+                return Expanded(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.size,
+                      itemBuilder: (context, index) {
+                        return Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            child: ListTile(
+                                leading: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      shape: BoxShape.circle),
+                                ),
+                                title:
+                                    Text(snapshot.data!.docs[index]['name'])));
+                      }),
+                );
+              }
+              return CircularProgressIndicator();
             }),
         const Align(
           alignment: Alignment.bottomRight,
