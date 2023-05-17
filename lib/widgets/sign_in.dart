@@ -1,6 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import "package:firebase_auth/firebase_auth.dart";
 
 class Login extends StatelessWidget {
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     //method where widgets are created
@@ -16,7 +20,7 @@ class Login extends StatelessWidget {
                 Expanded(
                   child: Container(
                     width: 50,
-                    height: 160,
+                    height: 120,
                   ),
                 ),
               ],
@@ -55,8 +59,8 @@ class Login extends StatelessWidget {
               // ),
             ),
             Center(
-              child: GoogleSignInButton(),
-            ),
+                //child: GoogleSignInButton(),
+                ),
             Row(
               children: <Widget>[
                 Expanded(
@@ -102,6 +106,7 @@ class Login extends StatelessWidget {
                 SizedBox(
                     width: 300,
                     child: TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: OutlineInputBorder(),
@@ -122,6 +127,7 @@ class Login extends StatelessWidget {
                 SizedBox(
                     width: 300,
                     child: TextField(
+                      controller: passController,
                       obscureText: true,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -140,8 +146,12 @@ class Login extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/dashboard');
-
+                      FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passController.text)
+                          .then((value) =>
+                              Navigator.of(context).pushNamed('/dashboard'));
                     },
                     child: Text("Login",
                         style: TextStyle(
@@ -162,7 +172,6 @@ class Login extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.of(context).pushNamed('/sign_up');
-
                     },
                     child: Text("Sign Up",
                         style: TextStyle(
@@ -180,6 +189,7 @@ class Login extends StatelessWidget {
   } //immutable widgets - state of these widgets don't CHANGE as app runs (e.g. texts)
 }
 
+/*
 class GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -215,7 +225,7 @@ class GoogleSignInButton extends StatelessWidget {
     );
   }
 }
-
+*/
 //  CHECK BOX
 class RoundedCheckBox extends StatefulWidget {
   @override

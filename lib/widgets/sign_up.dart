@@ -8,7 +8,8 @@ class SignUp extends StatelessWidget {
   final String userType;
   final String fullName;
   final String schoolName;
-  SignUp({super.key,
+  SignUp({
+    super.key,
     required this.userType,
     required this.fullName,
     required this.schoolName,
@@ -37,6 +38,8 @@ class SignUp extends StatelessWidget {
         "schoolName": schoolName,
       };
       await docUser.set(user);
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
     }
 
     return Material(
@@ -173,51 +176,49 @@ class SignUp extends StatelessWidget {
                         border: OutlineInputBorder(),
                       ),
                     )),
-                const SizedBox(width:20),
-    OutlinedButton (
-    onPressed: (){
-    final email = emailController.text;
-    final password = passwordController.text;
-    final passconf = confirmpassController.text;
-    if (password != passconf){
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error!'),
-            content: Text('Password did not match!'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Close'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }else{
-      createUser(email: email, password: password);
-      Navigator.of(context).pushNamed('/dashboard');
-    }
-
-
-    },
-    child: Text("Register",
-    style: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
-    )),
-    style: OutlinedButton.styleFrom(
-    foregroundColor: Colors.black,
-    side: BorderSide(
-    color: Colors.black,
-    ),
-    ),
-    ),
-                OutlinedButton (
-                  onPressed: (){
+                const SizedBox(width: 20),
+                OutlinedButton(
+                  onPressed: () {
+                    final email = emailController.text;
+                    final password = passwordController.text;
+                    final passconf = confirmpassController.text;
+                    if (password != passconf) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Error!'),
+                            content: Text('Password did not match!'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('Close'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      createUser(email: email, password: password);
+                      Navigator.of(context).pushNamed('/dashboard');
+                    }
+                  },
+                  child: Text("Register",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      )),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    side: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                OutlinedButton(
+                  onPressed: () {
                     Navigator.of(context).pushNamed('/login');
                   },
                   child: Text("Go to Login",
@@ -232,7 +233,6 @@ class SignUp extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
           ],
