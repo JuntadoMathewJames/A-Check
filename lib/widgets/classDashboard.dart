@@ -39,7 +39,9 @@ class _ClassDashboard extends State<ClassDashboard> {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return AddStudentsToClassList();
+                      return AddStudentsToClassList(
+                        classes: widget.myClass,
+                      );
                     },
                   );
                 },
