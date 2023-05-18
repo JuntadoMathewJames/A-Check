@@ -10,6 +10,7 @@ import 'widgets/create_accountDetails.dart';
 import 'widgets/homePage.dart';
 import 'widgets/attendanceSheet.dart';
 import 'widget/my_class.dart';
+import 'widgets/attendanceRecord.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -51,7 +52,15 @@ class RouteGenerator {
                   myClass: args,
                 ));
       case "/check_attendance":
-        return MaterialPageRoute(builder: (_) => AttendanceApp());
+        final args = settings.arguments as Classes;
+        return MaterialPageRoute(builder: (_) => AttendanceApp(
+          myClass: args,
+        ));
+      case "/check_record":
+        final args = settings.arguments as Classes;
+        return MaterialPageRoute(builder: (_) => AttendanceRecord(
+          myClass: args,
+        ));
       default:
         return _errorRoute();
     }

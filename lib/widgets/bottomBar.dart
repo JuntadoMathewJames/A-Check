@@ -1,16 +1,18 @@
 //To be used in classDashboard.dart:  bottomNavigationBar: BottomBreadcrumbBar()
 
 import 'package:flutter/material.dart';
-
+import 'my_class.dart';
 class BottomBreadcrumbBar extends StatefulWidget {
-  const BottomBreadcrumbBar({super.key});
+  final Classes myClass;
+  final selectedButtonIndex;
+  const BottomBreadcrumbBar({super.key,required this.myClass, this.selectedButtonIndex});
 
   @override
   _BottomBreadcrumbBarState createState() => _BottomBreadcrumbBarState();
 }
 
 class _BottomBreadcrumbBarState extends State<BottomBreadcrumbBar> {
-  int _selectedButtonIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,10 @@ class _BottomBreadcrumbBarState extends State<BottomBreadcrumbBar> {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                  _selectedButtonIndex = 0;
-                });
+                Navigator.of(context).pushNamed('/class_dashboard',arguments: widget.myClass);
               },
               child: Container(
-                color: _selectedButtonIndex == 0 ? Colors.grey : Colors.white,
+                color: widget.selectedButtonIndex == 0 ? Colors.grey : Colors.white,
                 padding: EdgeInsets.all(12.0),
                 child: Image.asset(
                   'assets/person.png', // Replace with your logo image path
@@ -48,12 +48,10 @@ class _BottomBreadcrumbBarState extends State<BottomBreadcrumbBar> {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                  _selectedButtonIndex = 1;
-                });
+                Navigator.of(context).pushNamed('/check_record',arguments: widget.myClass);
               },
               child: Container(
-                color: _selectedButtonIndex == 1 ? Colors.grey : Colors.white,
+                color: widget.selectedButtonIndex == 1 ? Colors.grey : Colors.white,
                 padding: EdgeInsets.all(12.0),
                 child: Image.asset(
                   'assets/check.png', // Replace with your logo image path

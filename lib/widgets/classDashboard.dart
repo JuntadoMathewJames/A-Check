@@ -3,7 +3,6 @@ import 'classLabel.dart';
 import 'sideBar.dart';
 import 'bottomBar.dart';
 import 'dialogAddStudentsToClass.dart';
-import 'radioButtons.dart';
 import "my_class.dart";
 
 class ClassDashboard extends StatefulWidget {
@@ -94,14 +93,14 @@ class _ClassDashboard extends State<ClassDashboard> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/check_attendance');
+              Navigator.of(context).pushNamed('/check_attendance', arguments: widget.myClass);
             },
             tooltip: 'Check Attendance',
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             child: const Icon(Icons.check_circle_outline),
           ),
-          bottomNavigationBar: const BottomBreadcrumbBar(),
+          bottomNavigationBar:  BottomBreadcrumbBar(myClass: widget.myClass,selectedButtonIndex: 0),
         );
       },
     );
